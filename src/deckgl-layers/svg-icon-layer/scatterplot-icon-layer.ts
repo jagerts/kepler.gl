@@ -18,15 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import {ScatterplotLayer} from '@deck.gl/layers';
+import {ScatterplotLayer, ScatterplotLayerProps} from '@deck.gl/layers';
+import {LayerContext} from '@deck.gl/core/lib/layer';
 import {Geometry, Model} from '@luma.gl/core';
 import GL from '@luma.gl/constants';
 
 const DEFAULT_POS = [-1, -1, 0, -1, 1, 0, 1, 1, 0, 1, -1, 0];
-export default class ScatterplotIconLayer extends ScatterplotLayer {
-  _getModel(gl) {
+
+export interface ScatterplotIconLayerProps extends ScatterplotLayerProps<any> {
+  iconGeometry: number;
+}
+
+export interface ScatterplotIconLayerContext extends LayerContext {
+  shaderCache: any;
+}
+
+export default class ScatterplotIconLayer extends ScatterplotLayer<any, ScatterplotIconLayerProps> {
+  context: ScatterplotIconLayerContext;
+
+  _getModel(gl: WebGLRenderingContext) {
     // use default scatterplot shaders
-    const shaders = this.getShaders();
+    const shaders = this.getShaders(undefined);
 
     const {iconGeometry} = this.props;
 
