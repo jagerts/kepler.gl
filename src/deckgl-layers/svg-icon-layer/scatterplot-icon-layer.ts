@@ -19,7 +19,6 @@
 // THE SOFTWARE.
 
 import {ScatterplotLayer, ScatterplotLayerProps} from '@deck.gl/layers';
-import {LayerContext} from '@deck.gl/core/lib/layer';
 import {Geometry, Model} from '@luma.gl/core';
 import GL from '@luma.gl/constants';
 
