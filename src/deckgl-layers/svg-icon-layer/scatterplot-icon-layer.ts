@@ -29,13 +29,7 @@ export interface ScatterplotIconLayerProps extends ScatterplotLayerProps<any> {
   iconGeometry: number;
 }
 
-export interface ScatterplotIconLayerContext extends LayerContext {
-  shaderCache: any;
-}
-
 export default class ScatterplotIconLayer extends ScatterplotLayer<any, ScatterplotIconLayerProps> {
-  context: ScatterplotIconLayerContext;
-
   _getModel(gl: WebGLRenderingContext) {
     // use default scatterplot shaders
     const shaders = this.getShaders(undefined);
@@ -61,6 +55,7 @@ export default class ScatterplotIconLayer extends ScatterplotLayer<any, Scatterp
       id: this.props.id,
       geometry,
       isInstanced: true,
+      // @ts-ignore
       shaderCache: this.context.shaderCache
     });
   }
